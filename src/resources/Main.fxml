@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.MainController">
+    <children>
+      <MenuBar prefHeight="30.0" prefWidth="800.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="管理选项">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#" text="读者管理" />
+              <MenuItem mnemonicParsing="false" onAction="#" text="书籍管理" />
+              <MenuItem mnemonicParsing="false" onAction="#" text="借阅管理" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="其他">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#" text="退出" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="mainFrameAnchorPane" layoutY="24.0" prefHeight="700.0" prefWidth="800.0">
+         <children>
+            <HBox prefHeight="372.0" prefWidth="638.0" />
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
