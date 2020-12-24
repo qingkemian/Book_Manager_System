@@ -1,10 +1,5 @@
 package main.model;
 
-/**
- * @描述：
- * @创建人:ZelongChen
- * @日期:2020-12-23 22:20
- */
 public class Book {
     private int bookID;
     private String bookName;

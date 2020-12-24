@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.BrController">
+    <children>
+        <VBox prefHeight="700.0" prefWidth="800.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="54.0" prefWidth="800.0">
+                    <children>
+                        <Label text="借书还书管理" textAlignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="50.0">
+                    <children>
+                        <Label text="书籍ID：" />
+                        <TextField fx:id="QBookID" />
+                  <CheckBox fx:id="checkIn" mnemonicParsing="false" text="在库" />
+                        <Button fx:id="btQBook" mnemonicParsing="false" text="查询" />
+                    </children>
+                </HBox>
+            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="50.0">
+               <children>
+                  <Label text="借阅者ID：" />
+                  <TextField fx:id="QReaderID" />
+                  <Button fx:id="btQReader" mnemonicParsing="false" text="查询" />
+                  <Button fx:id="btAll" mnemonicParsing="false" text="查询借书还书所有信息" />
+               </children>
+            </HBox>
+                <HBox prefHeight="265.0" prefWidth="800.0">
+                    <children>
+                        <TableView fx:id="brTable" prefHeight="292.0" prefWidth="800.0">
+                            <columns>
+                        <TableColumn fx:id="thisBookID" prefWidth="108.0" text="本书ID" />
+                                <TableColumn fx:id="bookID" prefWidth="124.0" text="书籍ID" />
+                                <TableColumn fx:id="bookState" prefWidth="113.0" text="借阅状态" />
+                                <TableColumn fx:id="bookBRTime" prefWidth="107.0" text="借出还入次数" />
+                        <TableColumn fx:id="readerID" prefWidth="142.0" text="借阅者ID" />
+                        <TableColumn fx:id="outTime" prefWidth="182.0" text="借阅时间" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </HBox>
+                <HBox prefHeight="186.0" prefWidth="800.0">
+                    <children>
+                        <VBox prefHeight="282.0" prefWidth="879.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="89.0" prefWidth="800.0" spacing="50.0">
+                                    <children>
+                                        <Label prefHeight="19.0" prefWidth="70.0" text="本书ID：" />
+                                        <TextField fx:id="SThisBID" />
+                                        <Label prefHeight="19.0" prefWidth="93.0" text="书籍ID：" />
+                                        <TextField fx:id="SBookID" />
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="68.0" prefWidth="800.0" spacing="50.0">
+                                    <children>
+                                        <Label prefHeight="22.0" prefWidth="70.0" text="借阅状态：" />
+                              <RadioButton fx:id="rbIn" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" text="in">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="stage" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbOut" mnemonicParsing="false" prefHeight="20.0" prefWidth="57.0" text="out" toggleGroup="$stage" />
+                                        <Label prefHeight="24.0" prefWidth="93.0" text="借出还入次数：" />
+                                        <TextField fx:id="SBookBRTime" />
+                                    </children>
+                                </HBox>
+                        <HBox alignment="CENTER" prefHeight="89.0" prefWidth="800.0" spacing="50.0">
+                           <children>
+                              <Label prefHeight="19.0" prefWidth="70.0" text="借阅者ID：" />
+                              <TextField fx:id="SReadID" />
+                              <Label prefHeight="19.0" prefWidth="93.0" text="借阅时间：" />
+                              <TextField fx:id="SOutTime" />
+                           </children>
+                        </HBox>
+                                <HBox alignment="CENTER" prefHeight="64.0" prefWidth="800.0" spacing="50.0">
+                                    <children>
+                                        <Button fx:id="btAdd" mnemonicParsing="false" text="添加" />
+                                        <Button fx:id="btM" mnemonicParsing="false" text="修改" />
+                                        <Button fx:id="btD" mnemonicParsing="false" text="删除" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children></HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

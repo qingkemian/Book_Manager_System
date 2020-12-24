@@ -2,11 +2,6 @@ package main.model;
 
 import java.sql.Timestamp;
 
-/**
- * @描述：
- * @创建人:ZelongChen
- * @日期:2020-12-23 22:20
- */
 public class Br {
     public enum state{
         male,
