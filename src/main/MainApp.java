@@ -13,6 +13,7 @@ import main.controller.MainController;
 import main.services.AdminServer;
 import main.utils.SimpleTools;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,6 +64,42 @@ public class MainApp extends Application {
         } else {
             simpleTools.informationDialog(Alert.AlertType.INFORMATION, "Remind", "Info", "登录失败");
         }
+    }
+
+    public AnchorPane initReader() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../resources/ReaderManager.fxml"));
+            AnchorPane root = loader.load();
+            return root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public AnchorPane initBook() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../resources/BookManager.fxml"));
+            AnchorPane root = loader.load();
+            return root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public AnchorPane initBR() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("../resources/BRManager.fxml"));
+            AnchorPane root = loader.load();
+            return root;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Initializable replaceSceneContent(String fxml) throws Exception {

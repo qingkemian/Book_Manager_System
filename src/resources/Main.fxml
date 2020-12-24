@@ -12,14 +12,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="管理选项">
             <items>
-              <MenuItem mnemonicParsing="false" text="读者管理" />
-              <MenuItem mnemonicParsing="false" text="书籍管理" />
-              <MenuItem mnemonicParsing="false" text="借阅管理" />
+              <MenuItem fx:id="menuReader" mnemonicParsing="false" onAction="#to_reader" text="读者管理" />
+              <MenuItem fx:id="menuBook" mnemonicParsing="false" onAction="#to_book" text="书籍管理" />
+              <MenuItem fx:id="menuBr" mnemonicParsing="false" onAction="#to_br" text="借阅管理" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="其他">
               <items>
-                <MenuItem mnemonicParsing="false" text="退出" />
+                <MenuItem fx:id="exit" mnemonicParsing="false" text="退出" />
               </items>
             </Menu>
         </menus>

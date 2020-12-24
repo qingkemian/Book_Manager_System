@@ -39,7 +39,7 @@
                   <Label text="借阅者ID：" />
                   <TextField fx:id="QReaderID" />
                   <Button fx:id="btQReader" mnemonicParsing="false" text="查询" />
-                  <Button fx:id="btAll" mnemonicParsing="false" text="查询借书还书所有信息" />
+                  <Button fx:id="btAll" mnemonicParsing="false" text="展示全部" />
                </children>
             </HBox>
                 <HBox prefHeight="265.0" prefWidth="800.0">
