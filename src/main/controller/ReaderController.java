@@ -53,6 +53,4 @@ public class ReaderController {
 
     @FXML
     private Button btD;
-
-
 }

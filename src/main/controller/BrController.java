@@ -7,6 +7,12 @@ import javafx.event.ActionEvent;
 
 public class BrController {
     @FXML
+    private TextField QThisBookID;
+
+    @FXML
+    private Button btQThisBook;
+
+    @FXML
     private TextField QBookID;
 
     @FXML
