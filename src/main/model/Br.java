@@ -17,6 +17,7 @@ public class Br {
     private int bookID;
     private state bookstate;
     private int bookBRTime;
+    private int readerID;
     private Timestamp outTime;
 
     public int getThisbookID() {
@@ -49,6 +50,14 @@ public class Br {
 
     public void setBookBRTime(int bookBRTime) {
         this.bookBRTime = bookBRTime;
+    }
+
+    public int getReaderID() {
+        return readerID;
+    }
+
+    public void setReaderID(int readerID) {
+        this.readerID = readerID;
     }
 
     public Timestamp getOutTime() {
