@@ -233,7 +233,7 @@ public class ReaderController {
 
                 readerTable.setItems(readerObservableList);
             } else {
-                simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "删除失败");
+                simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "删除失败，用户有未还书");
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();

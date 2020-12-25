@@ -28,14 +28,14 @@
                     <children>
                         <Label text="书籍ID：" />
                         <TextField fx:id="QBookID" />
-                        <Button fx:id="btQID" mnemonicParsing="false" text="查询" />
+                        <Button fx:id="btQID" mnemonicParsing="false" onAction="#bt_findByBookID" text="查询" />
                     </children>
                 </HBox>
             <HBox alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="50.0">
                <children>
                   <Label text="书籍名称：" />
                   <TextField fx:id="QBookName" />
-                  <Button fx:id="btQName" mnemonicParsing="false" text="查询" />
+                  <Button fx:id="btQName" mnemonicParsing="false" onAction="#bt_findByBookName" text="查询" />
                   <Button fx:id="btAll" mnemonicParsing="false" onAction="#showall" text="显示所有" />
                </children>
             </HBox>
@@ -80,9 +80,9 @@
                         </HBox>
                                 <HBox alignment="CENTER" prefHeight="64.0" prefWidth="800.0" spacing="50.0">
                                     <children>
-                                        <Button fx:id="btAdd" mnemonicParsing="false" text="添加" />
-                                        <Button fx:id="btM" mnemonicParsing="false" text="修改" />
-                                        <Button fx:id="btD" mnemonicParsing="false" text="删除" />
+                                        <Button fx:id="btAdd" mnemonicParsing="false" onAction="#bt_createBook" text="添加" />
+                                        <Button fx:id="btM" mnemonicParsing="false" onAction="#bt_modifyBook" text="修改" />
+                                        <Button fx:id="btD" mnemonicParsing="false" onAction="#bt_deleteBook" text="删除" />
                                     </children>
                                 </HBox>
                             </children>
