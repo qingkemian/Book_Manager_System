@@ -76,6 +76,12 @@ public class BrController {
     private TextField SOutTime;
 
     @FXML
+    private Button btOut;
+
+    @FXML
+    private Button btIn;
+
+    @FXML
     private Button btAdd;
 
     @FXML

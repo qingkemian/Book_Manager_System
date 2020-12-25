@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 
 public class Br {
     public enum state{
-        male,
-        female
+        in,
+        out
     }
 
     private int thisbookID;

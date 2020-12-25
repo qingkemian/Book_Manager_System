@@ -26,14 +26,14 @@
                         </Label>
                     </children>
                 </HBox>
-            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="70.0">
+            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="800.0" spacing="70.0">
                <children>
                   <Label prefHeight="21.0" prefWidth="91.0" text="某本书的ID：" />
                   <TextField fx:id="QThisBookID" prefHeight="27.0" prefWidth="172.0" />
                   <Button fx:id="btQThisBook" mnemonicParsing="false" text="查询" />
                </children>
             </HBox>
-                <HBox alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="50.0">
+                <HBox alignment="CENTER" prefHeight="47.0" prefWidth="800.0" spacing="50.0">
                     <children>
                         <Label text="书籍ID：" />
                         <TextField fx:id="QBookID" />
@@ -41,7 +41,7 @@
                         <Button fx:id="btQBook" mnemonicParsing="false" text="查询" />
                     </children>
                 </HBox>
-            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="800.0" spacing="50.0">
+            <HBox alignment="CENTER" prefHeight="63.0" prefWidth="800.0" spacing="50.0">
                <children>
                   <Label text="借阅者ID：" />
                   <TextField fx:id="QReaderID" />
@@ -49,9 +49,9 @@
                   <Button fx:id="btAll" mnemonicParsing="false" text="展示全部" />
                </children>
             </HBox>
-                <HBox prefHeight="265.0" prefWidth="800.0">
+                <HBox prefHeight="274.0" prefWidth="800.0">
                     <children>
-                        <TableView fx:id="brTable" prefHeight="292.0" prefWidth="800.0">
+                        <TableView fx:id="brTable" prefHeight="280.0" prefWidth="800.0">
                             <columns>
                         <TableColumn fx:id="thisBookID" prefWidth="108.0" text="本书ID" />
                                 <TableColumn fx:id="bookID" prefWidth="124.0" text="书籍ID" />
@@ -63,7 +63,7 @@
                         </TableView>
                     </children>
                 </HBox>
-                <HBox prefHeight="186.0" prefWidth="800.0">
+                <HBox prefHeight="211.0" prefWidth="800.0">
                     <children>
                         <VBox prefHeight="282.0" prefWidth="879.0">
                             <children>
@@ -96,8 +96,10 @@
                               <TextField fx:id="SOutTime" />
                            </children>
                         </HBox>
-                                <HBox alignment="CENTER" prefHeight="64.0" prefWidth="800.0" spacing="50.0">
+                                <HBox alignment="CENTER" prefHeight="63.0" prefWidth="800.0" spacing="50.0">
                                     <children>
+                              <Button fx:id="btOut" mnemonicParsing="false" text="借阅" />
+                              <Button fx:id="btIn" mnemonicParsing="false" text="还书" />
                                         <Button fx:id="btAdd" mnemonicParsing="false" text="添加" />
                                         <Button fx:id="btM" mnemonicParsing="false" text="修改" />
                                         <Button fx:id="btD" mnemonicParsing="false" text="删除" />
