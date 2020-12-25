@@ -9,7 +9,7 @@ import java.util.List;
 public class BrServer {
     private BrDao brDao = new BrDao();
 
-    public List<Br> getAllBr() throws SQLException {
+    public List<Br> getAllBr(){
         try {
             return brDao.getAllBr();
         }  catch (SQLException e) {

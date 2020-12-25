@@ -1,9 +1,19 @@
 package main.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.model.Br;
+import main.services.BrServer;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class BrController {
     @FXML
@@ -31,25 +41,25 @@ public class BrController {
     private Button btAll;
 
     @FXML
-    private TableView<?> brTable;
+    private TableView<Br> brTable;
 
     @FXML
-    private TableColumn<?, ?> thisBookID;
+    private TableColumn<Br,Integer > thisBookID;
 
     @FXML
-    private TableColumn<?, ?> bookID;
+    private TableColumn<Br, Integer> bookID;
 
     @FXML
-    private TableColumn<?, ?> bookState;
+    private TableColumn<Br, Br.state> bookState;
 
     @FXML
-    private TableColumn<?, ?> bookBRTime;
+    private TableColumn<Br, Integer> bookBRTime;
 
     @FXML
-    private TableColumn<?, ?> readerID;
+    private TableColumn<Br, Integer> readerID;
 
     @FXML
-    private TableColumn<?, ?> outTime;
+    private TableColumn<Br, Timestamp> outTime;
 
     @FXML
     private TextField SThisBID;
@@ -89,4 +99,54 @@ public class BrController {
 
     @FXML
     private Button btD;
+
+    public void initialize() {
+        thisBookID.setCellValueFactory(new PropertyValueFactory<Br,Integer>("thisbookID"));
+        bookID.setCellValueFactory(new PropertyValueFactory<Br,Integer>("bookID"));
+        bookState.setCellValueFactory(new PropertyValueFactory<Br,Br.state>("bookstate"));
+        bookBRTime.setCellValueFactory(new PropertyValueFactory<Br,Integer>("bookBRTime"));
+        readerID.setCellValueFactory(new PropertyValueFactory<Br,Integer>("readerID"));
+        outTime.setCellValueFactory(new PropertyValueFactory<Br,Timestamp>("outTime"));
+
+        BrServer brServer = new BrServer();
+        List<Br> brList = brServer.getAllBr();
+        ObservableList<Br> brObservableList = FXCollections.observableList(brList);
+
+        brTable.setItems(brObservableList);
+
+        brTable.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> showDetails(newValue));
+    }
+
+    public void showDetails(Br br) {
+        if (br == null) {
+            return;
+        } else {
+            SThisBID.setText(String.valueOf(br.getThisbookID()));
+            SBookID.setText(String.valueOf(br.getBookID()));
+            if (((br.getBookstate()).toString()) == "in")
+                rbIn.setSelected(true);
+            else
+                rbOut.setSelected(true);
+            SBookBRTime.setText(String.valueOf(br.getBookBRTime()));
+
+            int id = br.getReaderID();
+            String str_id = id + "";
+            if ("".equals(str_id)){
+                SReadID.setText("");
+            } else {
+                SReadID.setText(String.valueOf(id));
+            }
+
+
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String theTime = "";
+            try {
+                theTime = sdf.format(br.getOutTime());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            SOutTime.setText(theTime);
+        }
+    }
 }

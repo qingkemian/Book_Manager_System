@@ -1,11 +1,18 @@
 package main.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
+import main.model.Book;
+import main.services.BookServer;
+
+import java.util.List;
 
 public class BookController {
     @FXML
@@ -24,22 +31,22 @@ public class BookController {
     private Button btAll;
 
     @FXML
-    private TableView<?> bookTable;
+    private TableView<Book> bookTable;
 
     @FXML
-    private TableColumn<?, ?> bookID;
+    private TableColumn<Book, Integer> bookID;
 
     @FXML
-    private TableColumn<?, ?> bookName;
+    private TableColumn<Book, String> bookName;
 
     @FXML
-    private TableColumn<?, ?> bookCategory;
+    private TableColumn<Book, String> bookCategory;
 
     @FXML
-    private TableColumn<?, ?> bookNum;
+    private TableColumn<Book, Integer> bookNum;
 
     @FXML
-    private TableColumn<?, ?> bookInfo;
+    private TableColumn<Book, String> bookInfo;
 
     @FXML
     private TextField SBookID;
@@ -64,4 +71,32 @@ public class BookController {
 
     @FXML
     private Button btD;
+
+    public void initialize() {
+        bookID.setCellValueFactory(new PropertyValueFactory<Book,Integer>("bookID"));
+        bookName.setCellValueFactory(new PropertyValueFactory<Book,String>("bookName"));
+        bookCategory.setCellValueFactory(new PropertyValueFactory<Book,String>("bookCategory"));
+        bookNum.setCellValueFactory(new PropertyValueFactory<Book,Integer>("bookNum"));
+        bookInfo.setCellValueFactory(new PropertyValueFactory<Book,String>("bookInfo"));
+
+        BookServer bookServer = new BookServer();
+        List<Book> bookList = bookServer.getAllBook();
+        ObservableList<Book> bookObservableList = FXCollections.observableList(bookList);
+
+        bookTable.setItems(bookObservableList);
+
+        bookTable.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> showDetails(newValue));
+    }
+
+    public void showDetails(Book book) {
+        if (book == null)
+            return;
+        else {
+            SBookID.setText(String.valueOf(book.getBookID()));
+            SBookName.setText(book.getBookName());
+            SBookCategory.setText(book.getBookCategory());
+            SBookNum.setText(String.valueOf(book.getBookNum()));
+            SBookInfo.setText(book.getBookInfo());
+        }
+    }
 }
