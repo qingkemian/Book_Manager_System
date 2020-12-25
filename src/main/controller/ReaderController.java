@@ -154,9 +154,9 @@ public class ReaderController {
 
             ReaderServer readerServer = new ReaderServer();
 
-            boolean falg = readerServer.createReader(myReader);
+            boolean flag = readerServer.createReader(myReader);
 
-            if (falg) {
+            if (flag) {
                 simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "添加成功");
 
                 List<Reader> readerList = readerServer.getAllReader();
@@ -223,9 +223,9 @@ public class ReaderController {
 
             ReaderServer readerServer = new ReaderServer();
 
-            boolean falg = readerServer.deleteReader(id);
+            boolean flag = readerServer.deleteReader(id);
 
-            if (falg) {
+            if (flag) {
                 simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "删除成功");
 
                 List<Reader> readerList = readerServer.getAllReader();

@@ -66,6 +66,10 @@ public class MainApp extends Application {
         }
     }
 
+    public void adminOut(){
+        goLogin();
+    }
+
     public AnchorPane initReader() {
         try {
             FXMLLoader loader = new FXMLLoader();

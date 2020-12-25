@@ -19,7 +19,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="其他">
               <items>
-                <MenuItem fx:id="exit" mnemonicParsing="false" text="退出" />
+                <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#outAction" text="退出" />
               </items>
             </Menu>
         </menus>

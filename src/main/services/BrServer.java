@@ -18,7 +18,7 @@ public class BrServer {
         }
     }
 
-    public Br getBrByThisBookID(int thisbookID) {
+    public Br findBrByThisBookID(int thisbookID) {
         try {
             return brDao.getBrByThisBookID(thisbookID);
         }  catch (SQLException e) {
@@ -27,7 +27,7 @@ public class BrServer {
         }
     }
 
-    public List<Br> getBrByBookID(int bookID) {
+    public List<Br> findBrByBookID(int bookID) {
         try {
             return brDao.getBrByBookID(bookID);
         }  catch (SQLException e) {
@@ -36,10 +36,19 @@ public class BrServer {
         }
     }
 
-    public List<Br> getBrByReaderID(int readerID){
+    public List<Br> findBrByReaderID(int readerID){
         try {
             return brDao.getBrByReaderID(readerID);
         }  catch (SQLException e) {
+            System.out.println("getBrByReaderID Error:"+e);
+            return null;
+        }
+    }
+
+    public List<Br> findInBrByReaderID(int readerID){
+        try {
+            return brDao.getInBrByBookID(readerID);
+        } catch (SQLException e) {
             System.out.println("getBrByReaderID Error:"+e);
             return null;
         }

@@ -32,6 +32,12 @@ public class BrDao {
         return runner.query(sql,new BeanListHandler<Br>(Br.class),bookID);
     }
 
+    public List<Br> getInBrByBookID(int bookID) throws  SQLException {
+        QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
+        String sql="select * from br where bookID=? and bookstate='in'";
+        return runner.query(sql,new BeanListHandler<Br>(Br.class),bookID);
+    }
+
     public List<Br> getBrByReaderID(int readerID) throws  SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="select * from br where readerID=?";
@@ -40,9 +46,17 @@ public class BrDao {
 
     public boolean borrowBook(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql = "update br set bookstate=?,readerID=?,outTime=? where thisbookID=?";
+
         int reader = br.getReaderID();
         Timestamp d = new Timestamp(System.currentTimeMillis());
+
+        String sql="select * from br where readerID=?";
+        Br thebr = runner.query(sql,new BeanHandler<Br>(Br.class),reader);
+        Br.state stateLabel = thebr.getBookstate();
+        if (stateLabel == Br.state.out)
+            return false;
+
+        sql = "update br set bookstate=?,readerID=?,outTime=? where thisbookID=?";
 
         int affect = runner.execute(sql,(Br.state.out).toString(),reader,d,br.getThisbookID());
         return affect>=1?true:false;
@@ -50,11 +64,18 @@ public class BrDao {
 
     public boolean returnBook(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql = "update br set bookstate=?,bookBRTime=?,readerID=?,outTime=? where thisbookID=?";
         int reader = br.getReaderID();
         int brtime = br.getBookBRTime();
         brtime++;
         Timestamp d = new Timestamp(System.currentTimeMillis());
+
+        String sql="select * from br where readerID=?";
+        Br thebr = runner.query(sql,new BeanHandler<Br>(Br.class),reader);
+        Br.state stateLabel = thebr.getBookstate();
+        if (stateLabel == Br.state.in)
+            return false;
+
+        sql = "update br set bookstate=?,bookBRTime=?,readerID=?,outTime=? where thisbookID=?";
 
         int affect = runner.execute(sql,(Br.state.in).toString(),brtime,null,null,br.getThisbookID());
         return affect>=1?true:false;
@@ -63,7 +84,14 @@ public class BrDao {
     public boolean createBr(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into br values(?,?,?,?,?,?)";
-        int affect = runner.execute(sql,br.getThisbookID(),br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),br.getReaderID(),br.getOutTime());
+
+        int affect = 0;
+        int reader = br.getReaderID();
+
+        if (reader == 0)
+            affect = runner.execute(sql,br.getThisbookID(),br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),null,null);
+        else
+            affect = runner.execute(sql,br.getThisbookID(),br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),br.getReaderID(),br.getOutTime());
 
         BookServer bookServer = new BookServer();
         Book book = bookServer.findBookByBookID(br.getBookID());
@@ -81,7 +109,13 @@ public class BrDao {
     public boolean modifyBr(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql = "update br set bookID=?,bookstate=?,bookBRTime=?,readerID=?,outTime=? where thisbookID=?";
-        int affect = runner.execute(sql,br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),br.getReaderID(),br.getOutTime(),br.getThisbookID());
+        int affect = 0;
+        int reader = br.getReaderID();
+
+        if (reader == 0)
+            affect = runner.execute(sql,br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),null,null,br.getThisbookID());
+        else
+            affect = runner.execute(sql,br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),br.getReaderID(),br.getOutTime(),br.getThisbookID());
         return affect>=1?true:false;
     }
 

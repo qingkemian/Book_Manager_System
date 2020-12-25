@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import main.MainApp;
 
@@ -12,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.MenuItem;
 
 import javafx.event.ActionEvent;
+import main.utils.SimpleTools;
 
 public class MainController  implements Initializable {
 
@@ -57,5 +59,16 @@ public class MainController  implements Initializable {
         AnchorPane pane = new MainApp().initBR();
         mainFrameAnchorPane.getChildren().clear();
         mainFrameAnchorPane.getChildren().add(pane);
+    }
+
+    @FXML
+    void outAction(ActionEvent event) {
+        SimpleTools simpleTools = new SimpleTools();
+
+        try{
+            application.adminOut();
+        } catch (Exception e) {
+            simpleTools.informationDialog(Alert.AlertType.WARNING,"Remind", "warning", "Error");
+        }
     }
 }
