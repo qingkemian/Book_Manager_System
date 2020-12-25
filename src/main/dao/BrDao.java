@@ -108,9 +108,35 @@ public class BrDao {
 
     public boolean modifyBr(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql = "update br set bookID=?,bookstate=?,bookBRTime=?,readerID=?,outTime=? where thisbookID=?";
+
         int affect = 0;
         int reader = br.getReaderID();
+        int thisbookid = br.getThisbookID();
+
+        String sql="select * from br where thisbookID=?";
+        Br thebr = runner.query(sql,new BeanHandler<Br>(Br.class),thisbookid);
+
+        int bookid = thebr.getBookID();
+        int newbookid = br.getBookID();
+        if (bookid == newbookid){
+
+        } else {
+            sql = "select * from book where bookID=?";
+            Book mybook = runner.query(sql,new BeanHandler<Book>(Book.class),bookid);
+            int mynum = mybook.getBookNum();
+            mynum--;
+            sql = "update book set bookNum=? where bookID=?";
+            runner.execute(sql,mynum,bookid);
+
+            sql = "select * from book where bookID=?";
+            Book newbook = runner.query(sql,new BeanHandler<Book>(Book.class),newbookid);
+            int newnum = newbook.getBookNum();
+            newnum++;
+            sql = "update book set bookNum=? where bookID=?";
+            runner.execute(sql,newnum,newbookid);
+        }
+
+        sql = "update br set bookID=?,bookstate=?,bookBRTime=?,readerID=?,outTime=? where thisbookID=?";
 
         if (reader == 0)
             affect = runner.execute(sql,br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),null,null,br.getThisbookID());

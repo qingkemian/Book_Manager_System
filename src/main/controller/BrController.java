@@ -291,7 +291,7 @@ public class BrController {
             simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "输入有误");
         }catch (Exception e) {
             e.printStackTrace();
-            simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "还书失败");
+            simpleTools.informationDialog(Alert.AlertType.WARNING, "Remind", "warning", "借书失败");
         }
     }
 
