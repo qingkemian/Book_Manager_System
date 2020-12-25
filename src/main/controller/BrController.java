@@ -149,4 +149,12 @@ public class BrController {
             SOutTime.setText(theTime);
         }
     }
+
+    public void showall(){
+        BrServer brServer = new BrServer();
+        List<Br> brList = brServer.getAllBr();
+        ObservableList<Br> brObservableList = FXCollections.observableList(brList);
+
+        brTable.setItems(brObservableList);
+    }
 }

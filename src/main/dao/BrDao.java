@@ -44,7 +44,7 @@ public class BrDao {
         int reader = br.getReaderID();
         Timestamp d = new Timestamp(System.currentTimeMillis());
 
-        int affect = runner.execute(sql,Br.state.out,reader,d,br.getThisbookID());
+        int affect = runner.execute(sql,(Br.state.out).toString(),reader,d,br.getThisbookID());
         return affect>=1?true:false;
     }
 
@@ -56,14 +56,14 @@ public class BrDao {
         brtime++;
         Timestamp d = new Timestamp(System.currentTimeMillis());
 
-        int affect = runner.execute(sql,Br.state.in,brtime,null,null,br.getThisbookID());
+        int affect = runner.execute(sql,(Br.state.in).toString(),brtime,null,null,br.getThisbookID());
         return affect>=1?true:false;
     }
 
     public boolean createBr(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into br values(?,?,?,?,?,?)";
-        int affect = runner.execute(sql,br.getThisbookID(),br.getBookID(),br.getBookstate(),br.getBookBRTime(),br.getReaderID(),br.getOutTime());
+        int affect = runner.execute(sql,br.getThisbookID(),br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),br.getReaderID(),br.getOutTime());
 
         BookServer bookServer = new BookServer();
         Book book = bookServer.findBookByBookID(br.getBookID());
@@ -81,16 +81,13 @@ public class BrDao {
     public boolean modifyBr(Br br) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql = "update br set bookID=?,bookstate=?,bookBRTime=?,readerID=?,outTime=? where thisbookID=?";
-        int affect = runner.execute(sql,br.getBookID(),br.getBookstate(),br.getBookBRTime(),br.getReaderID(),br.getOutTime(),br.getThisbookID());
+        int affect = runner.execute(sql,br.getBookID(),br.getBookstate().toString(),br.getBookBRTime(),br.getReaderID(),br.getOutTime(),br.getThisbookID());
         return affect>=1?true:false;
     }
 
     public boolean deleteBr(int thisbookID) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
-        String sql="delete from br where thisbookID=?";
-        int affect = runner.execute(sql,thisbookID);
-
-        sql="select * from br where thisbookID=?";
+        String sql="select * from br where thisbookID=?";
         Br br = runner.query(sql,new BeanHandler<Br>(Br.class),thisbookID);
 
         BookServer bookServer = new BookServer();
@@ -98,6 +95,10 @@ public class BrDao {
         int bookNum = book.getBookNum();
         bookNum -= 1;
         int bookID = br.getBookID();
+
+        sql="delete from br where thisbookID=?";
+        int affect = runner.execute(sql,thisbookID);
+
 
         if (affect >= 1) {
             sql = "update book set bookNum=? where bookID=?";

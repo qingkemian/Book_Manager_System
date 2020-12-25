@@ -36,7 +36,7 @@
                   <Label text="书籍名称：" />
                   <TextField fx:id="QBookName" />
                   <Button fx:id="btQName" mnemonicParsing="false" text="查询" />
-                  <Button fx:id="btAll" mnemonicParsing="false" text="显示所有" />
+                  <Button fx:id="btAll" mnemonicParsing="false" onAction="#showall" text="显示所有" />
                </children>
             </HBox>
                 <HBox prefHeight="292.0" prefWidth="800.0">

@@ -99,4 +99,12 @@ public class BookController {
             SBookInfo.setText(book.getBookInfo());
         }
     }
+
+    public void showall(){
+        BookServer bookServer = new BookServer();
+        List<Book> bookList = bookServer.getAllBook();
+        ObservableList<Book> bookObservableList = FXCollections.observableList(bookList);
+
+        bookTable.setItems(bookObservableList);
+    }
 }

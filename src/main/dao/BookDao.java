@@ -50,7 +50,7 @@ public class BookDao {
         String sql = "select * from br where bookID=?";
         List<Br> brList = runner.query(sql,new BeanListHandler<Br>(Br.class),bookID);
 
-        if (brList == null) {
+        if (brList == null || brList.size() == 0) {
             sql = "delete from book where bookID=?";
             int affect = runner.execute(sql,bookID);
             return affect>=1?true:false;

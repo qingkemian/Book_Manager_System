@@ -30,7 +30,7 @@ public class ReaderDao {
     public boolean createReader(Reader reader) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql="insert into reader values(?,?,?,?)";
-        int affect = runner.execute(sql,reader.getReaderID(),reader.getReaderName(),reader.getReaderSex(),reader.getReaderMajor());
+        int affect = runner.execute(sql,reader.getReaderID(),reader.getReaderName(),reader.getReaderSex().toString(),reader.getReaderMajor());
         return affect>=1?true:false;
     }
 
@@ -38,7 +38,7 @@ public class ReaderDao {
     public boolean modifyReader(Reader reader) throws SQLException {
         QueryRunner runner=new QueryRunner(DBUtils.getDataSource());
         String sql = "update reader set readerName=?,readerSex=?,readerMajor=? where readerID=?";
-        int affect = runner.execute(sql,reader.getReaderName(),reader.getReaderSex(),reader.getReaderMajor(),reader.getReaderMajor());
+        int affect = runner.execute(sql,reader.getReaderName(),reader.getReaderSex().toString(),reader.getReaderMajor(),reader.getReaderID());
         return affect>=1?true:false;
     }
 
@@ -49,7 +49,7 @@ public class ReaderDao {
         String sql = "select * from br where readerID=?";
         List<Br> brList = runner.query(sql,new BeanListHandler<Br>(Br.class),readerID);
 
-        if (brList == null) {
+        if (brList == null || brList.size() == 0) {
             // 将改用户从u表删除
             sql = "delete from reader where readerID=?";
             int affect = runner.execute(sql,readerID);
